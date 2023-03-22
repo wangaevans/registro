@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+<div class="max-w-md mx-auto min-h-screen grid place-items-center">
+  <div class="w-full">
+    <h1 class="h-10 text-center font-semibold text-2xl">Register</h1>
+    <form
+      action="{% url 'base:register' %}"
+      method="post"
+      class="grid space-y-2"
+    >
+      {% csrf_token %} {{form}}
+      <input
+        type="submit"
+        value="Sign Up"
+        class="bg-blue-500 text-white rounded my-5 p-3 cursor-pointer"
+      />
+     <p>Already have an account? <span><a class="text-blue-500" href="{% url 'base:login' %}">Sign In</a></span></p> 
+    </form>
+  </div>
+</div>
+{% endblock content %}

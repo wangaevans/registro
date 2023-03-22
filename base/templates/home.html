@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block content %}
+<div>
+  {% include 'partials/_header.html' %}
+  <div class="grid max-w-6xl mx-auto place-items-center">
+    <div>
+      <h1 class="text-3xl my-16 font-bold text-center">
+        Hi {{user.username}},Checkout Out this resources in {% for track in tracks %}{{track}}{% endfor %} Track
+      </h1>
+      <div class="gap-5 grid md:grid-cols-2">
+        {% for resource in resources %}
+        <div class="resource shadow-md shadow-gray-500 bg-gray-700 p-8 rounded">
+          <div class="resource_details">
+            <h1 class="font-bold text-2xl">{{resource.name}}</h1>
+            <p>{{resource.preview_text|linebreaks}}</p>
+            {% comment %} <img src="{{resource.document}}" alt="" /> {% endcomment %}
+            <p>{{resource.description}}</p>
+            {% if resource.available %}
+            <div>
+              <p class="">Available</p>
+              <button class="my-5">
+                <a href="{{resource.document.url}}" download class="bg-blue-500 py-4 px-6 rounded">Download</a>
+              </button>
+            </div>
+            {% else %}
+            <p class="text-rose-500 my-5 font-semibold">Not Available</p>
+
+            {% endif %}
+            <p class="text-gray-300 mt-2">{{resource.created|date:"m-d-Y"}}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{%include 'partials/_footer.html'%} {% endblock %}

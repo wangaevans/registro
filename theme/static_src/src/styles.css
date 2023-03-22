@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  font-family: sans-serif;
+}
+.helptext{
+  display: none;
+}
+form input,textarea{
+  color: #000;
+}

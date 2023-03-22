@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<header class="sticky top-0 flex justify-between items-center h-[100px] border-b border-gray-500 px-2">
+        <a class="font-bold text-2xl" href="/">Registro</a>
+        <ul class="flex items-center space-x-5 ">
+            <li><a href="/" class="{% if request.path == '/'%} text-blue-500 {% endif %}">Home</a></li>
+            {% comment %} <li><a href="{% url 'base:members' %}" class="{% if request.path == '/members'%} text-blue-500 {% endif %}">Members</a></li> {% endcomment %}
+            {%if user.is_authenticated%}
+            <li><a href="{% url 'base:profile' user.id %}"><img style="width:35px ;height: 35px;" class="border-2 border-gray-300 object-cover rounded-full"  alt="{{user.username}}.jpg" src="{{user.avatar.url}}"/></a></li>
+            {% else %}
+            <li><a href="{% url 'base:login' %}" class="{% if request.path == '/login'%} text-blue-500 {% endif %}">Login</a></li>
+            {% endif %}
+	</ul>
+    </header>
+    {% endblock content %}

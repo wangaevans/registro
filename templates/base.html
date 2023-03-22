@@ -1,0 +1,24 @@
+{% load static tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <title>Academy Portal</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+		{% tailwind_css %}
+	</head>
+
+	<body class="bg-gray-800 text-white leading-normal tracking-wide print:none">
+		<div class="container mx-auto min-h-rem-container">
+			<section class="px-5">
+			{% block content %}{% endblock%}
+			</section>
+		</div>
+
+	</body>
+</html>
