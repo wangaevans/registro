@@ -43,12 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tailwind',
-    'theme',
     'django_browser_reload',
     'base',
-    'copyright',
     "corsheaders",
+    'widget_tweaks',
 ]
 CSRF_TRUSTED_ORIGINS = [
     'https://registro-production-b5b7.up.railway.app'
@@ -96,16 +94,23 @@ WSGI_APPLICATION = 'academy_portal.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME':os.environ.get('PGDATABASE'),
-        'HOST':os.environ.get('PGHOST'),
-        'PASSWORD':os.environ.get('PGPASSWD'),
-        'PORT':os.environ.get('PGPORT'),
-        'USER':os.environ.get('PGUSER'),
-
-
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME':os.environ.get('PGDATABASE'),
+#         'HOST':os.environ.get('PGHOST'),
+#         'PASSWORD':os.environ.get('PGPASSWD'),
+#         'PORT':os.environ.get('PGPORT'),
+#         'USER':os.environ.get('PGUSER'),
+
+
+#     }
+# }
 
 
 # Password validation

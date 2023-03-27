@@ -1,5 +1,6 @@
+
 from django.contrib.auth.forms import UserCreationForm
-from .models import User
+from .models import User,HuaweiTrack
 from django import forms
 from django.forms import ModelForm
 
@@ -7,21 +8,22 @@ from django.forms import ModelForm
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'avatar', 'bio',]
+        fields = '__all__'
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'text-gray-600'}),
-            'first_name': forms.TextInput(attrs={'class': 'text-gray-600'}),
-            'last_name': forms.TextInput(attrs={'class': 'text-gray-600'}),
-            'email': forms.EmailInput(attrs={'class': 'text-gray-600'}),
-            'bio': forms.Textarea(attrs={'class': 'text-gray-600'}),
+            # 'huawei_id': forms.CharField(max_length=100),
+            'bio': forms.Textarea(attrs={'placeholder': 'Write something about yourself','rows':8}),
         }
 
 class CustomUserCreateForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email',
+        fields = ['first_name','last_name', 'email',
                   'password1', 'password2']
-        widgets = {
-            'username': forms.TextInput(attrs={'class': 'rounded'}),
-            'email': forms.EmailInput(attrs={'class': 'rounded'}),
-        }
+    
+
+class HuaweiTrackForm(forms.ModelForm):
+    track = forms.ModelChoiceField(queryset=HuaweiTrack.objects.all())
+
+    class Meta:
+        model = HuaweiTrack
+        fields = ['track']

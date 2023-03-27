@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% block content %}
+<section>
+  {% include 'partials/_header.html' %}
+  <div class="content">
+    <div>
+      <div class="mt-5 py-4">
+        <h1>How This Idea Came</h1>
+      </div>
+      <div>
+        <p class="fs-5 lead text-left">
+          When it was announced that Huawei Academy was to be launched at
+          Baraton Campus. The Academy Patrons began registering the fully
+          registered students with huawei Id's, However, The developer (Wanga
+          Evans) saw the process as inefficient since thy were using google
+          sheets. Some had to wait for permission inorder to update their
+          details on the sheets. Evans thought, He could make it better by
+          creating a simple web app that could handle the process.
+        </p>
+        <div class="tool">
+          <h1 class="my-4">
+            Technologies Used
+          </h1>
+          <ul class="technologies lead">
+            <li><a href="#">Python Django</a></li>
+            <li><a href="#">Tailwindcss</a></li>
+            <li><a href="#">PostgreSQL</a></li>
+            <li><a href="#">Git and Github</a></li>
+            <li><a href="#">Railway</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%include 'partials/_footer.html'%} {% endblock %}

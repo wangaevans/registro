@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<section>
+    {% include 'partials/_header.html' %}
+    <div>
+      <div class="search--bar my-4">
+    <form class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-primary" type="submit">Search</button>
+    </form>
+  </div>
+  {% if track is None %}
+<h2 class="py-3">No Activity, Enroll in one of the Huawei Tracks <a href="{% url 'base:select-huawei-track' %}">here</a></h2>
+{% else %}
+<h1 class="text-2xl my-14 font-bold text-center">
+</h1>
+{% endif %}
+    {% comment %} materials {% endcomment %}
+      <div class="resources--cards">
+        {% for material in materials %}
+        <div class="card p-2 mt-2 w-100 text-left">
+            <div class="d-grid">
+            <img src="{{material.banner}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title text-left">{{material.title}}</h5>
+              <p class="card-text">{{material.description}}</p>
+              <a href="{{material.url}}" download class="btn btn-primary">Download</a>
+            </div>
+      </div>
+    </div>
+        {% endfor %}
+      
+      </div>
+
+    </section>{% endblock content %}
+    {% include 'partials/_footer.html' %}

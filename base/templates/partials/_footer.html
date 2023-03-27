@@ -1,8 +1,6 @@
 {% extends 'base.html' %} {% block content %}
-{% load copyrighttags %}
 <footer
-  class="w-full border-t-1 border-gray-500 h-[80px] grid place-items-center mt-3"
 >
-  <p>Copyright&copy;{% getCopyrightYears %}. Wanga Evans | All Rights Reserved</p>
+  <p>Copyright &copy; {% now 'Y'%}. Wanga Evans</p>
 </footer>
 {% endblock content %}

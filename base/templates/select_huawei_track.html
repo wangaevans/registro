@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block content %}
+<div class="d-grid vh-100" style="place-items:center;">
+  <div>
+    <h2 class="text-center p-5">Welcome {{user.first_name}}, </br> Please Select your Huawei Track  to continue</h1>
+    <form class=" my-5" method="post">
+      {% csrf_token %} {{form}}
+      <input
+        type="submit"
+        class="btn btn-primary"
+        value="Confirm"
+      />
+    </form>
+  </div>
+</div>
+{% endblock content %}

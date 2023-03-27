@@ -12,41 +12,45 @@ class User(AbstractUser):
     first_name=models.CharField(max_length=100)
     last_name=models.CharField(max_length=100)
     email=models.EmailField(unique=True,max_length=100,null=True)
-    # track=models.TextField(default="Networking")
+    huawei_id=models.CharField(unique=True,max_length=100)
+    phone=models.CharField(unique=True,max_length=100)
     bio=models.TextField(blank=True)
-    avatar = ResizedImageField(size=[300, 300], default='https://cdn-icons-png.flaticon.com/512/6596/6596121.png')
-    # event_participant = models.BooleanField(default=True, null=True)
-
+    avatar = ResizedImageField(upload_to='profile_pictures',size=[300, 300], default='static/images/profile_pictures/pexels-guilherme-rossi-1755683.png')
+    
     USERNAME_FIELD='email'
 
     REQUIRED_FIELDS=['username']
+    
 
     class Meta:
         ordering = ['avatar']
 
-class Resource(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4,unique=True,editable=False)
-    name= models.CharField(max_length=200,  null=True)
-    preview_text = models.TextField(null=True, blank=True)
-    document=models.FileField(upload_to='uploads/', max_length=100)
-    description=models.TextField(blank=True)
-    available=models.BooleanField(default=True)
-    updated = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
-
-class Track(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4,unique=True,editable=False)
-    name= models.CharField(max_length=200,  null=True)
-    participants = models.ManyToManyField(User,through='TrackParticipant', blank=True, related_name='tracks',editable=True)
-    def __str__(self):
-        return str(self.name)
-
-class TrackParticipant(models.Model):
-    participant=models.ForeignKey(User,on_delete=models.CASCADE,blank=True)
-    track=models.ForeignKey(Track,on_delete=models.CASCADE,blank=True)
-    participating=models.BooleanField(default=False,blank=True)
+class HuaweiTrack(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    participants = models.ManyToManyField(User, through='Participant')
+    date_created = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now=True)
+    banner = models.URLField(max_length=500)
 
     def __str__(self):
-        return  str(self.track)
+        return self.name
+
+class Participant(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    track = models.ForeignKey(HuaweiTrack, on_delete=models.CASCADE)
+    date_joined = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.user.username}'
     
-    
+class Material(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4,unique=True,editable=False)
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    banner = models.URLField(max_length=200)
+    url = models.URLField()
+    track = models.ForeignKey(HuaweiTrack, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title

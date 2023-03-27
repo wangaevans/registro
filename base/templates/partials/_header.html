@@ -1,15 +1,63 @@
-{% extends 'base.html' %}
-{% block content %}
-<header class="sticky top-0 flex justify-between items-center h-[100px] border-b border-gray-500 px-2">
-        <a class="font-bold text-2xl" href="/">Registro</a>
-        <ul class="flex items-center space-x-5 ">
-            <li><a href="/" class="{% if request.path == '/'%} text-blue-500 {% endif %}">Home</a></li>
-            {% comment %} <li><a href="{% url 'base:members' %}" class="{% if request.path == '/members'%} text-blue-500 {% endif %}">Members</a></li> {% endcomment %}
-            {%if user.is_authenticated%}
-            <li><a href="{% url 'base:profile' user.id %}"><img style="width:35px ;height: 35px;" class="border-2 border-gray-300 object-cover rounded-full"  alt="{{user.username}}.jpg" src="{{user.avatar.url}}"/></a></li>
-            {% else %}
-            <li><a href="{% url 'base:login' %}" class="{% if request.path == '/login'%} text-blue-500 {% endif %}">Login</a></li>
-            {% endif %}
-	</ul>
-    </header>
-    {% endblock content %}
+{% extends 'base.html' %} {% block content %}
+ {% comment %} <nav class="navbar navbar-expand-lg navbar-light border-bottom border-gray py-3">
+   <div class="container-fluid container-lg ">
+    <a class="navbar-brand fs-3 fw-bold" href="/">Registro</a>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav align-items-center me-auto mb-2 mb-lg-0 ">
+        <li class="nav-item">
+          <a class="nav-link active"  href="/">Home</a>
+        </li>
+    
+      
+      </ul>
+    </div>
+    <button class="navbar-toggler" data-bs-toggle="offcanvas" type="button"  data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+      </div>
+      </nav> {% endcomment %}
+      <nav class="navbar navbar-light">
+  <div class="container-fluid">
+    <div class="d-flex">
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Baraton Academy</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+            <li class="nav-item">
+          <a class="nav-link active"  href="{% url 'base:about' %}">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'base:resources' %}">Resources</a>
+        </li>
+        {% if user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'base:dashboard' %}">Dashboard</a>
+        </li>
+        {% endif %}
+      
+          <li class="nav-item dropdown">
+          
+          
+        {% comment %} <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form> {% endcomment %}
+      </div>
+    </div>
+    <a class="navbar-brand fs-3 fw-bold" href="#">Huawei Academy</a>
+  </div>
+  <a class="nav-link active" href="{% url 'base:profile' user.id %}"><img class="user--avatar" src="{{user.avatar.url}}" alt="avatar.png"/></a>
+  </div>
+</nav>
+
+{% endblock content %}

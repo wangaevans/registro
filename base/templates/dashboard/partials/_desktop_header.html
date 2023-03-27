@@ -1,0 +1,18 @@
+    <header class="w-full justify-center items-center py-2 px-6 hidden sm:flex">
+            <div class="w-1/2">
+                <h1 class="font-bold text-2xl text-gray-700"><span><img src="" alt="" ></span>Baraton Academy</h1>
+
+            </div>
+            <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
+                <button @click="isOpen = !isOpen" class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border border-gray-600 hover:border-gray-600 focus:outline-none">
+                    <img class="w-full h-full rounded-full object-cover"
+                                                    src="{{user.avatar.url}}"
+                                                    alt="" />
+                </button>
+                <button x-show="isOpen" @click="isOpen = false" class="h-full w-full fixed inset-0 cursor-default"></button>
+                <div x-show="isOpen" class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16">
+                    <a href="/" class="block px-4 py-2 account-link hover:text-white">Account</a>
+                    <a href="{% url 'base:logout' %}" class="block px-4 py-2 account-link hover:text-white">Sign Out</a>
+                </div>
+            </div>
+        </header>

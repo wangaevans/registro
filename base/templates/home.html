@@ -1,36 +1,35 @@
 {% extends 'base.html' %} {% block content %}
-<div>
+<section>
   {% include 'partials/_header.html' %}
-  <div class="grid max-w-6xl mx-auto place-items-center">
-    <div>
-      <h1 class="text-3xl my-16 font-bold text-center">
-        Hi {{user.username}},Checkout Out this resources in {% for track in tracks %}{{track}}{% endfor %} Track
-      </h1>
-      <div class="gap-5 grid md:grid-cols-2">
-        {% for resource in resources %}
-        <div class="resource shadow-md shadow-gray-500 bg-gray-700 p-8 rounded">
-          <div class="resource_details">
-            <h1 class="font-bold text-2xl">{{resource.name}}</h1>
-            <p>{{resource.preview_text|linebreaks}}</p>
-            {% comment %} <img src="{{resource.document}}" alt="" /> {% endcomment %}
-            <p>{{resource.description}}</p>
-            {% if resource.available %}
-            <div>
-              <p class="">Available</p>
-              <button class="my-5">
-                <a href="{{resource.document.url}}" download class="bg-blue-500 py-4 px-6 rounded">Download</a>
-              </button>
-            </div>
-            {% else %}
-            <p class="text-rose-500 my-5 font-semibold">Not Available</p>
-
-            {% endif %}
-            <p class="text-gray-300 mt-2">{{resource.created|date:"m-d-Y"}}</p>
-          </div>
+  <div class="flex-column text-start">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3">
+      <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+        <h1 class="display-8 fw-bold lh-1">Hi {{user.first_name}},</br><span class="fs-2">Find the most recent resources in the {{track}} Track</h1>
+        <p class="lead">{{track.description}}</span></p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+          <a href="{% url 'base:resources' %}" type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Get Started</a>
+          {% comment %} <button type="button" class="btn btn-outline-secondary btn-lg px-4">Intro</button> {% endcomment %}
         </div>
-        {% endfor %}
+      </div>
+      <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden ">
+          <img class="rounded-lg-3" class="track-banner" src="{{track.banner}}" alt="" width="720" height="420">
       </div>
     </div>
+    {% comment %} initial content   {% endcomment %}
+        {% comment %} {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    
+    {% endif %} {% endcomment %}
+  
+    {% comment %} initial content   {% endcomment %}
+
+    
+
+    </div>
   </div>
-</div>
+</section>
 {%include 'partials/_footer.html'%} {% endblock %}
